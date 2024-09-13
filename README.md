@@ -1,15 +1,17 @@
 ## 🎯 Overview
 
-A simple, lightweight Task Tracker application implemented in Java with a Command Line Interface (CLI). The project is
-designed to help users manage and track their tasks, offering features like adding, updating, viewing, and deleting
-tasks, all while storing data in a JSON file, ensuring your tasks are saved between sessions.
+A lightweight command-line task tracker application implemented in Java. This tool allows users to manage their tasks by
+adding, updating, deleting, and viewing tasks, with data stored in a JSON file for persistence
+
+**Note:** This project is a sample solution for the [Task Tracker](https://roadmap.sh/projects/task-tracker) challenge
+from the [roadmap.sh](https://roadmap.sh/)
 
 ## ✨ Features
 
 - **Task Management:** Add, update, and delete tasks easily
 - **Task Listing:** List all tasks, with options to filter by status
 - **Task Status Management:** Mark tasks with statuses: in-progress and done
-- **Command Line Interface** Accepts commands and arguments for various operations
+- **Command-line Interface** Accepts commands and arguments for various operations
 
 ## 🚀 How to Run
 
@@ -50,6 +52,3 @@ mvn exec:java -Dexec.mainClass=com.karimi.erfan.App -Dexec.args='list done'
 mvn exec:java -Dexec.mainClass=com.karimi.erfan.App -Dexec.args='list todo'
 mvn exec:java -Dexec.mainClass=com.karimi.erfan.App -Dexec.args='list in-progress'
 ```
-
-Sample solution for the [Task Tracker](https://roadmap.sh/projects/task-tracker) challenge
-from [roadmap.sh](https://roadmap.sh/).
