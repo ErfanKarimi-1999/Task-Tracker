@@ -15,5 +15,6 @@ public class App {
         TaskService taskService = new TaskServiceImpl(taskRepository);
         CommandLineHandler commandLineHandler = new CommandLineHandler(taskService);
         commandLineHandler.start(args);
+
     }
 }
