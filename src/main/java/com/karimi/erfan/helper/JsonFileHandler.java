@@ -13,7 +13,17 @@ public class JsonFileHandler {
 
     public JsonFileHandler(String filePath) {
         this.filePath = filePath;
+        createDirectoryIfNotExists();
         createFileIfNotExists();
+    }
+
+    private void createDirectoryIfNotExists() {
+        try {
+            File file = new File(filePath.substring(0, filePath.lastIndexOf('/')));
+            file.mkdir();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     private void createFileIfNotExists() {
