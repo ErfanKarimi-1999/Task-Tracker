@@ -15,12 +15,11 @@ from the [roadmap.sh](https://roadmap.sh/)
 
 ## 🚀 How to Run
 
-1. Clone the repository:
+1. Clone the repository
     ```bash
     git clone https://github.com/ErfanKarimi-1999/Task-Tracker.git
     cd Task-Tracker
     ```
-
 2. Compile
     ```bash
     mvn clean install
