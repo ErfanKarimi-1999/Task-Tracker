@@ -23,6 +23,7 @@ from the [roadmap.sh](https://roadmap.sh/)
 
 2. Compile
     ```bash
+    mvn clean install
     mvn compile
     ```
 3. Run
