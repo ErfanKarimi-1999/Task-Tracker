@@ -3,13 +3,14 @@ package com.karimi.erfan.service;
 import com.karimi.erfan.model.Task;
 import com.karimi.erfan.model.TaskStatus;
 import com.karimi.erfan.repository.TaskRepository;
+import com.karimi.erfan.repository.TaskRepositoryImpl;
 
 import java.util.List;
 
 public class TaskServiceImpl implements TaskService {
-    private final TaskRepository taskRepository;
+    private final TaskRepositoryImpl taskRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepositoryImpl taskRepository) {
         this.taskRepository = taskRepository;
     }
 
@@ -25,24 +26,22 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void add(Task task) {
-        List<Task> tasks = taskRepository.findAll();
-        if (tasks.isEmpty()) {
+        if (taskRepository.getTaskDataAccess().getTasks().isEmpty()) {
             task.setId(1L);
         } else {
-            Long last_id = tasks.getLast().getId();
+            Long last_id = taskRepository.getTaskDataAccess().getTasks().last().getId();
             task.setId(last_id + 1);
         }
-        tasks.add(task);
-        taskRepository.saveAll(tasks);
+        taskRepository.getTaskDataAccess().getTasks().add(task);
+        taskRepository.saveAll();
     }
 
     @Override
     public void update(Long id, String description) {
-        List<Task> tasks = taskRepository.findAll();
-        for (Task task : tasks) {
+        for (Task task : taskRepository.getTaskDataAccess().getTasks()) {
             if (task.getId().equals(id)) {
                 task.setDescription(description);
-                taskRepository.saveAll(tasks);
+                taskRepository.saveAll();
                 return;
             }
         }
@@ -50,18 +49,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void delete(Long id) {
-        List<Task> tasks = taskRepository.findAll();
-        tasks.removeIf(task -> task.getId().equals(id));
-        taskRepository.saveAll(tasks);
+        taskRepository.getTaskDataAccess().getTasks().removeIf(task -> task.getId().equals(id));
+        taskRepository.saveAll();
     }
 
     @Override
     public void mark(Long id, TaskStatus taskStatus) {
-        List<Task> tasks = taskRepository.findAll();
-        for (Task task : tasks) {
+        for (Task task : taskRepository.getTaskDataAccess().getTasks()) {
             if (task.getId().equals(id)) {
                 task.setStatus(taskStatus);
-                taskRepository.saveAll(tasks);
+                taskRepository.saveAll();
                 return;
             }
         }

@@ -2,7 +2,7 @@ package com.karimi.erfan.model;
 
 import java.time.LocalDateTime;
 
-public class Task {
+public class Task implements Comparable<Task> {
     private Long id;
     private String description;
 
@@ -60,6 +60,11 @@ public class Task {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return id.compareTo(task.getId());
     }
 
     @Override

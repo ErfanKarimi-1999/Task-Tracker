@@ -6,6 +6,7 @@ import com.karimi.erfan.model.TaskStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
 
 public class TaskMapper {
     private String jsonPropertyValue(String jsonProperty) {
@@ -15,7 +16,7 @@ public class TaskMapper {
                 .stripLeading();
     }
 
-    public Task jsonToTask(List<String> jsonProperties) {
+    private Task jsonToTask(List<String> jsonProperties) {
         Task task = new Task();
         String lineValue = jsonPropertyValue(jsonProperties.get(0));
         task.setId(Long.parseLong(lineValue));
@@ -30,6 +31,16 @@ public class TaskMapper {
         return task;
     }
 
+    public List<Task> jsonToTasks(List<String> jsonFileLines) {
+        List<Task> tasks = new ArrayList<>();
+        for (int i = 0; i < jsonFileLines.size(); i++) {
+            if (jsonFileLines.get(i).equals("    {")) {
+                tasks.add(jsonToTask(jsonFileLines.subList(i + 1, i + 6)));
+            }
+        }
+        return tasks;
+    }
+
     public String taskToJson(Task task) {
         return "    {\n" +
                 "      \"id\": " + task.getId() + ",\n" +
@@ -40,7 +51,7 @@ public class TaskMapper {
                 "    },\n";
     }
 
-    public String tasksToJson(List<Task> tasks) {
+    public String tasksToJson(SortedSet<Task> tasks) {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{\n");
         jsonBuilder.append("  \"tasks\": [\n");

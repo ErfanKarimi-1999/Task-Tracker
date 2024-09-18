@@ -10,5 +10,5 @@ public interface TaskRepository {
 
     List<Task> findAllByStatus(TaskStatus taskStatus);
 
-    void saveAll(List<Task> tasks);
+    void saveAll();
 }
